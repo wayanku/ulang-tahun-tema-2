@@ -774,26 +774,19 @@
 
         <!-- SECTION 2: BRIDE -->
         <section class="pt-20 pb-4 px-4 bg-white overflow-hidden">
-            <!-- GANTI KE FLEXBOX: Lebih stabil untuk vertical alignment di Safari -->
-            <div class="flex flex-row items-center justify-center gap-6">
+            <!-- Menggunakan struktur dari contoh yang berfungsi untuk memastikan alignment -->
+            <div class="flex items-center gap-4">
                 <!-- Sisi Kiri: Tulisan Vertikal -->
-                <div class="flex-shrink-0 self-center"> 
-                    <!-- HAPUS data-aos dari container ini agar layout tidak bergeser saat loading -->
-                    <div class="vertical-container">
-                        <!-- Pindahkan animasi ke elemen teks langsung -->
-                        <div class="v-text-dark" data-aos="fade-right" data-aos-delay="100">The</div>
-                        <div class="v-text-purple" data-aos="fade-right" data-aos-delay="300">Birthday Girl</div>
-                    </div>
+                <div class="vertical-container" data-aos="fade-right">
+                    <div class="v-text-dark">The</div>
+                    <div class="v-text-purple">Birthday Girl</div>
                 </div>
                 
                 <!-- Sisi Kanan: Kartu Foto -->
-                <div class="relative flex-grow max-w-md">
-                    <div class="custom-card-frame relative z-10" data-aos="fade-left">
-                        <!-- Wrapper Aspect Ratio 4:5 (Card sebagai pedoman) -->
-                        <div class="w-full aspect-[4/5] overflow-hidden bg-gray-100">
-                            <!-- Tambahkan width & height attribute agar browser mereservasi layout sebelum gambar muncul -->
-                            <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" width="400" height="500" class="w-full h-full object-cover" alt="dedek malika" loading="eager">
-                        </div>
+                <div class="flex-1 relative" data-aos="fade-left">
+                    <div class="custom-card-frame relative z-10">
+                        <!-- Menggunakan img sederhana seperti pada contoh yang berfungsi -->
+                        <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-auto" alt="dedek malika" loading="eager">
                         <div class="info-border-box">
                             <h3 class="font-serif italic text-3xl text-gray-800 mb-2">dedek malika</h3>
                             <a href="https://www.instagram.com/dedekmalika" target="_blank" class="flex items-center justify-center gap-1 text-purple-theme mb-4 hover:opacity-80 transition-opacity">
