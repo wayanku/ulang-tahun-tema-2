@@ -489,6 +489,19 @@
             to { transform: translateX(-50%); }
         }
 
+        /* Story Background Slideshow */
+        .story-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .story-slide.active {
+            opacity: 1;
+        }
+
         /* --- New Gift Card Style --- */
         .bank-card {
             background: linear-gradient(135deg, #fff 0%, var(--soft-silver) 100%);
@@ -843,8 +856,8 @@
             <!-- Background Slideshow -->
             <!-- Hapus data-aos di sini karena animasi transform bisa merusak efek sticky -->
             <div class="sticky top-0 h-screen w-full overflow-hidden z-0">
-                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true');"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+                <div id="story-slideshow" class="absolute inset-0 w-full h-full"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10"></div>
             </div>
 
             <!-- Timeline Content -->
@@ -1509,6 +1522,35 @@
             }
         }
         createParticles();
+
+        // --- STORY BACKGROUND SLIDESHOW ---
+        const storyImages = [
+            "https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true",
+            "https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_496938534_18325096435207196_6201163391166582384_n.jpg?raw=true",
+            "https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_514757419_18331423072207196_1241808838390695610_n.jpg?raw=true",
+            "https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_514757421_18331423081207196_7888175206911346158_n%20(1).jpg?raw=true"
+        ];
+        
+        const storySlideshow = document.getElementById('story-slideshow');
+        let currentStoryIndex = 0;
+
+        if (storySlideshow) {
+            storyImages.forEach((img, i) => {
+                const div = document.createElement('div');
+                div.className = `story-slide ${i === 0 ? 'active' : ''}`;
+                div.style.backgroundImage = `url(${img})`;
+                storySlideshow.appendChild(div);
+            });
+
+            setInterval(() => {
+                const slides = storySlideshow.querySelectorAll('.story-slide');
+                if (slides.length > 0) {
+                    slides[currentStoryIndex].classList.remove('active');
+                    currentStoryIndex = (currentStoryIndex + 1) % slides.length;
+                    slides[currentStoryIndex].classList.add('active');
+                }
+            }, 4000); // Ganti gambar setiap 4 detik
+        }
 
         // --- TAMBAHAN: LOGIC CUSTOM CURSOR ---
         const cursorDot = document.querySelector('.cursor-dot');
