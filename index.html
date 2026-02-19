@@ -30,6 +30,7 @@
             overflow-x: hidden; /* Kunci mutlak agar tidak bisa scroll samping */
             width: 100%;
             overscroll-behavior-x: none; /* Mencegah efek 'membal' atau swipe gesture browser */
+            scroll-behavior: smooth; /* Scroll menjadi lembut */
         }
         body {
             font-family: 'Montserrat', sans-serif;
@@ -488,26 +489,6 @@
             to { transform: translateX(-50%); }
         }
 
-        /* Story Love Slideshow Background */
-        #story-slider-track {
-            display: flex;
-            height: 100%;
-            width: max-content;
-            animation: marquee 40s linear infinite;
-        }
-        .story-slide-image {
-            height: 100%;
-            width: auto;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            /* Bergerak cepat di paruh pertama, lalu melambat di paruh kedua */
-            50% { transform: translateX(-35%); }
-            100% { transform: translateX(-50%); }
-        }
-
         /* --- New Gift Card Style --- */
         .bank-card {
             background: linear-gradient(135deg, #fff 0%, var(--soft-silver) 100%);
@@ -583,12 +564,12 @@
         }
 
         .luxury-card {
-            background: rgba(20, 20, 20, 0.5); /* Lebih gelap agar teks tetap jelas */
-            backdrop-filter: blur(3px); /* Blur dikurangi agar background lebih terlihat */
-            -webkit-backdrop-filter: blur(3px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 50px 30px;
-            border-radius: 4px; /* Sudut sedikit tegas agar terlihat klasik mewah */
+            background: rgba(255, 255, 255, 0.1); /* Glassmorphism Effect */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 60px 30px;
+            border-radius: 24px; /* Sudut lebih lembut dan modern */
             box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
             max-width: 450px;
             width: 90%; /* Agar tidak mepet pinggir di HP */
@@ -600,8 +581,9 @@
         .luxury-card::after {
             content: '';
             position: absolute;
-            top: 12px; left: 12px; right: 12px; bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
             pointer-events: none;
         }
         
@@ -654,9 +636,56 @@
             opacity: 1 !important; /* Override default opacity fade */
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
         }
+
+        /* --- TAMBAHAN: EFEK BERKELAS (Grain & Cursor) --- */
+        /* 1. Grain Texture Overlay (Efek Kertas/Film Mewah) */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* 2. Custom Cursor (Hanya di Desktop) */
+        @media (min-width: 768px) {
+            body {
+                cursor: none; /* Sembunyikan kursor bawaan */
+            }
+            .cursor-dot,
+            .cursor-outline {
+                position: fixed;
+                top: 0;
+                left: 0;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                z-index: 10000;
+                pointer-events: none;
+            }
+            .cursor-dot {
+                width: 6px;
+                height: 6px;
+                background-color: var(--main-purple);
+            }
+            .cursor-outline {
+                width: 30px;
+                height: 30px;
+                border: 1px solid rgba(109, 40, 217, 0.5);
+                transition: width 0.2s, height 0.2s, background-color 0.2s;
+            }
+        }
     </style>
 </head>
 <body class="antialiased overflow-hidden">
+
+    <!-- Tambahan: Grain Overlay & Custom Cursor -->
+    <div class="grain-overlay"></div>
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
 
     <!-- Container Utama -->
     <div class="max-w-md mx-auto bg-white min-h-screen relative shadow-2xl">
@@ -669,17 +698,28 @@
             
             <div class="relative z-10 flex justify-center w-full" data-aos="fade-up" data-aos-duration="1500">
                 <div class="luxury-card text-center">
-                    <p class="font-serif text-white tracking-[0.4em] text-[10px] md:text-xs mb-6 uppercase opacity-90">Perayaan Ulang Tahun</p>
+                    <!-- Ornament Star -->
+                    <div class="mb-4 flex justify-center opacity-80 animate-pulse">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
+                    </div>
+
+                    <p class="font-serif text-white tracking-[0.3em] text-[10px] md:text-xs mb-2 uppercase opacity-90">The Birthday Celebration of</p>
                     
                     <!-- Nama Mempelai: Ukuran disesuaikan (4xl di HP, 6xl di PC) agar aman -->
-                    <h1 class="font-cursive text-5xl md:text-7xl text-white mb-8 drop-shadow-2xl leading-snug py-2" style="text-shadow: 0 4px 10px rgba(0,0,0,0.3);">dedek malika</h1>
+                    <h1 class="font-cursive text-6xl md:text-7xl text-white mb-6 drop-shadow-2xl leading-snug py-2" style="text-shadow: 0 4px 15px rgba(0,0,0,0.5);">dedek malika</h1>
                     
                     <!-- Garis Pemisah Elegan -->
-                    <div class="h-[1px] w-24 bg-gradient-to-r from-transparent via-white to-transparent mx-auto mb-8 opacity-70"></div>
+                    <div class="flex items-center justify-center gap-3 mb-8 opacity-70">
+                        <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-white"></div>
+                        <div class="w-1.5 h-1.5 bg-white rotate-45"></div>
+                        <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-white"></div>
+                    </div>
 
-                    <div class="mb-8 text-white animate__animated animate__fadeInUp animate__delay-1s">
-                        <p class="font-serif text-[11px] italic mb-3 opacity-90 tracking-wide">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-                        <h2 id="guest-name" class="text-xl font-bold tracking-widest uppercase border-b border-white/20 inline-block pb-2">Tamu Undangan</h2>
+                    <div class="mb-10 animate__animated animate__fadeInUp animate__delay-1s">
+                        <div class="inline-block bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-xl shadow-lg">
+                            <p class="font-serif text-[10px] text-white/80 italic mb-1 tracking-wider">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+                            <h2 id="guest-name" class="text-lg font-bold text-white tracking-widest uppercase">Tamu Undangan</h2>
+                        </div>
                     </div>
                     
                     <button id="btn-open" class="btn-luxury flex items-center gap-3 mx-auto">
@@ -731,7 +771,8 @@
                 <!-- Sisi Kanan: Kartu Foto -->
                 <div class="flex-1 relative" data-aos="fade-left">
                     <div class="custom-card-frame relative z-10">
-                        <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-auto" alt="dedek malika">
+                        <!-- Tambahkan aspect-[3/4] object-cover agar tinggi sudah ter-booking sejak awal -->
+                        <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-auto aspect-[3/4] object-cover" alt="dedek malika">
                         <div class="info-border-box">
                             <h3 class="font-serif italic text-3xl text-gray-800 mb-2">dedek malika</h3>
                             <a href="https://www.instagram.com/dedekmalika" target="_blank" class="flex items-center justify-center gap-1 text-purple-theme mb-4 hover:opacity-80 transition-opacity">
@@ -786,15 +827,11 @@
         </section>
 
         <!-- SECTION: DRESS CODE -->
-        <section class="bg-white pb-20 px-6 text-center overflow-hidden">
+        <section class="bg-white py-24 px-6 text-center overflow-hidden">
             <div data-aos="fade-up">
-                <div class="inline-block p-4 bg-gray-100 rounded-full mb-4 border border-gray-200">
-                    <svg class="text-purple-theme" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19.45,6.05a7,7,0,0,0-14.9,0,1,1,0,0,0,1.9,0,5,5,0,0,1,10.1,0,1,1,0,0,0,1.9,0ZM21,10H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"/>
-                    </svg>
-                </div>
                 <h2 class="font-serif text-4xl text-purple-theme italic">Dress Code</h2>
-                <div class="h-[1px] w-20 bg-purple-200 mx-auto mt-4 mb-6"></div>
+                <div class="h-[1px] w-20 bg-purple-200 mx-auto mt-4 mb-8"></div>
+                
                 <p class="text-sm text-gray-600 max-w-xs mx-auto leading-relaxed">
                     Kenakan pakaian terbaik Anda dengan sentuhan warna <strong class="font-bold text-purple-800">Ungu</strong> atau <strong class="font-bold text-gray-500">Perak</strong> untuk menambah kemeriahan suasana.
                 </p>
@@ -804,13 +841,9 @@
         <!-- SECTION STORY LOVE (UPDATED WITH CARDS) -->
         <section class="relative bg-black min-h-[160vh]">
             <!-- Background Slideshow -->
-            <div class="sticky top-0 h-screen w-full overflow-hidden z-0">
-                <div class="absolute inset-0 overflow-hidden" style="mask-image: linear-gradient(to right, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 60%, transparent 100%);">
-                    <div id="story-slider-track" class="flex h-full">
-                        <!-- Images will be injected by JS -->
-                    </div>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+            <div class="sticky top-0 h-screen w-full overflow-hidden z-0" data-aos="fade-in" data-aos-duration="1500">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
             </div>
 
             <!-- Timeline Content -->
@@ -1256,20 +1289,6 @@
 
         setInterval(changeHeroImage, 5000); // Change image every 5 seconds
 
-        // --- STORY LOVE SLIDESHOW ---
-        const storySliderTrack = document.getElementById('story-slider-track');
-
-        if (storySliderTrack) {
-            // Duplicate images for seamless loop
-            const loopImages = [...images, ...images];
-            loopImages.forEach(imgSrc => {
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.className = 'story-slide-image';
-                storySliderTrack.appendChild(img);
-            });
-        }
-
         // --- GIFT SECTION (UPDATED) ---
         const btnGift = document.getElementById('btnGift');
         const giftDetails = document.getElementById('gift-details');
@@ -1329,34 +1348,65 @@
                         return;
                     }
 
-                    wishes.forEach(wish => {
+                    // Gunakan DocumentFragment untuk performa yang lebih baik dan keamanan
+                    const fragment = document.createDocumentFragment();
+
+                    wishes.reverse().forEach(wish => { // Balik urutan agar yang terbaru di atas
                         // Format Tanggal
                         const date = new Date(wish.timestamp);
                         const dateStr = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
                         
-                        // Badge Warna
-                        const badgeClass = wish.kehadiran === 'Hadir' ? 'hadir' : 'tidak';
-                        const initial = wish.nama.charAt(0).toUpperCase();
+                        // --- Create elements safely to prevent XSS ---
+                        const wishCard = document.createElement('div');
+                        wishCard.className = 'wish-card';
 
-                        const html = `
-                            <div class="wish-card">
-                                <div class="flex gap-3">
-                                    <div class="wish-avatar">${initial}</div>
-                                    <div class="w-full">
-                                        <div class="flex justify-between items-start">
-                                            <div>
-                                                <h5 class="wish-name">${wish.nama}</h5>
-                                                <span class="wish-date">${dateStr}</span>
-                                            </div>
-                                            <span class="wish-badge ${badgeClass}">${wish.kehadiran}</span>
-                                        </div>
-                                        <p class="wish-message">"${wish.ucapan}"</p>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        wishesList.innerHTML += html;
+                        const flexContainer = document.createElement('div');
+                        flexContainer.className = 'flex gap-3';
+
+                        const avatar = document.createElement('div');
+                        avatar.className = 'wish-avatar';
+                        avatar.textContent = wish.nama.charAt(0).toUpperCase();
+
+                        const contentWrapper = document.createElement('div');
+                        contentWrapper.className = 'w-full';
+
+                        const header = document.createElement('div');
+                        header.className = 'flex justify-between items-start';
+
+                        const nameWrapper = document.createElement('div');
+                        
+                        const nameEl = document.createElement('h5');
+                        nameEl.className = 'wish-name';
+                        nameEl.textContent = wish.nama; // Aman: Mencegah XSS
+
+                        const dateEl = document.createElement('span');
+                        dateEl.className = 'wish-date';
+                        dateEl.textContent = dateStr;
+
+                        const badge = document.createElement('span');
+                        badge.className = `wish-badge ${wish.kehadiran === 'Hadir' ? 'hadir' : 'tidak'}`;
+                        badge.textContent = wish.kehadiran;
+
+                        const messageEl = document.createElement('p');
+                        messageEl.className = 'wish-message';
+                        messageEl.textContent = `"${wish.ucapan}"`; // Aman: Mencegah XSS
+
+                        // --- Assemble elements ---
+                        nameWrapper.appendChild(nameEl);
+                        nameWrapper.appendChild(dateEl);
+                        header.appendChild(nameWrapper);
+                        header.appendChild(badge);
+                        contentWrapper.appendChild(header);
+                        contentWrapper.appendChild(messageEl);
+                        flexContainer.appendChild(avatar);
+                        flexContainer.appendChild(contentWrapper);
+                        wishCard.appendChild(flexContainer);
+                        
+                        fragment.appendChild(wishCard);
                     });
+
+                    // Tambahkan semua elemen ke DOM dalam satu operasi
+                    wishesList.appendChild(fragment);
                 }
             } catch (error) {
                 console.error('Error loading wishes:', error);
@@ -1458,6 +1508,45 @@
             }
         }
         createParticles();
+
+        // --- TAMBAHAN: LOGIC CUSTOM CURSOR ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        // Hanya jalankan di layar lebar (Desktop)
+        if (window.matchMedia("(min-width: 768px)").matches && cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                // Dot mengikuti instan
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                // Outline mengikuti dengan delay halus (efek fluid)
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+
+            // Efek Hover pada elemen interaktif (Membesar saat hover link/button)
+            const interactiveElements = document.querySelectorAll('a, button, .cursor-pointer, input, select, textarea');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorOutline.style.width = '50px';
+                    cursorOutline.style.height = '50px';
+                    cursorOutline.style.backgroundColor = 'rgba(109, 40, 217, 0.1)';
+                    cursorOutline.style.borderColor = 'transparent';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorOutline.style.width = '30px';
+                    cursorOutline.style.height = '30px';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                    cursorOutline.style.borderColor = 'rgba(109, 40, 217, 0.5)';
+                });
+            });
+        }
     </script>
 </body>
 </html>
