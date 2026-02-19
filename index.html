@@ -774,7 +774,7 @@
 
         <!-- SECTION 2: BRIDE -->
         <section class="pt-20 pb-4 px-4 bg-white overflow-hidden">
-            <div class="flex items-center gap-4">
+            <div class="grid grid-cols-[auto_1fr] items-center gap-4">
                 <!-- Sisi Kiri: Tulisan Vertikal -->
                 <div> <!-- Wrapper stabil tanpa animasi untuk menjaga posisi tengah -->
                     <div class="vertical-container" data-aos="fade-right">
@@ -784,10 +784,12 @@
                 </div>
                 
                 <!-- Sisi Kanan: Kartu Foto -->
-                <div class="flex-1 relative"> <!-- Wrapper stabil tanpa animasi -->
+                <div class="relative"> <!-- Wrapper stabil tanpa animasi, flex-1 dihapus karena sudah pakai Grid -->
                     <div class="custom-card-frame relative z-10" data-aos="fade-left">
-                        <!-- Tambahkan aspect-[3/4] object-cover agar tinggi sudah ter-booking sejak awal -->
-                        <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-auto aspect-[3/4] object-cover" alt="dedek malika" loading="eager">
+                        <!-- Wrapper Aspect Ratio 4:5 (Card sebagai pedoman) -->
+                        <div class="w-full aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-full object-cover" alt="dedek malika" loading="eager">
+                        </div>
                         <div class="info-border-box">
                             <h3 class="font-serif italic text-3xl text-gray-800 mb-2">dedek malika</h3>
                             <a href="https://www.instagram.com/dedekmalika" target="_blank" class="flex items-center justify-center gap-1 text-purple-theme mb-4 hover:opacity-80 transition-opacity">
