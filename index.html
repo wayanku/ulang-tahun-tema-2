@@ -774,10 +774,11 @@
 
         <!-- SECTION 2: BRIDE -->
         <section class="pt-20 pb-4 px-4 bg-white overflow-hidden">
-            <!-- Menggunakan struktur dari contoh yang berfungsi untuk memastikan alignment -->
-            <div class="flex items-center gap-4">
+            <!-- PERBAIKAN: items-center diganti items-stretch agar tinggi kolom sama -->
+            <div class="flex items-stretch gap-4">
                 <!-- Sisi Kiri: Tulisan Vertikal -->
-                <div class="vertical-container" data-aos="fade-right">
+                <!-- PERBAIKAN: ditambah flex flex-col justify-center agar tulisan selalu di tengah tinggi kolom -->
+                <div class="vertical-container flex flex-col justify-center" data-aos="fade-right">
                     <div class="v-text-dark">The</div>
                     <div class="v-text-purple">Birthday Girl</div>
                 </div>
@@ -785,8 +786,11 @@
                 <!-- Sisi Kanan: Kartu Foto -->
                 <div class="flex-1 relative" data-aos="fade-left">
                     <div class="custom-card-frame relative z-10">
-                        <!-- Menggunakan img sederhana seperti pada contoh yang berfungsi -->
-                        <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-auto" alt="dedek malika" loading="eager">
+                        <!-- PERBAIKAN: Ditambah style aspect-ratio dan min-height -->
+                        <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" 
+                             class="w-full h-auto object-cover" 
+                             style="aspect-ratio: 3/4; min-height: 200px;"
+                             alt="dedek malika" loading="eager">
                         <div class="info-border-box">
                             <h3 class="font-serif italic text-3xl text-gray-800 mb-2">dedek malika</h3>
                             <a href="https://www.instagram.com/dedekmalika" target="_blank" class="flex items-center justify-center gap-1 text-purple-theme mb-4 hover:opacity-80 transition-opacity">
