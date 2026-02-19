@@ -84,14 +84,30 @@
             animation: rotate-music 4s linear infinite;
         }
 
-        /* Flower Sway Animation */
-        @keyframes flower-sway {
-            0% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(-30deg) scale(1.1); }
-            100% { transform: rotate(-45deg) scale(1); }
+        /* Flower Entrance & Sway Animation */
+        @keyframes flower-enter {
+            from {
+                opacity: 0;
+                transform: translate(40px, 40px) rotate(-80deg);
+            }
+            to {
+                opacity: 1;
+                /* The final resting position before the sway starts */
+                transform: translate(0, 0) rotate(-45deg);
+            }
         }
-        .animate-flower-continuous {
-            animation: flower-sway 6s ease-in-out infinite;
+
+        @keyframes flower-sway {
+            0% { transform: rotate(-45deg); }
+            50% { transform: rotate(-40deg); } /* Softer sway */
+            100% { transform: rotate(-45deg); }
+        }
+
+        .flower-container {
+            opacity: 0; /* Start hidden */
+            /* Chain two animations: enter first, then sway infinitely */
+            animation: flower-enter 1.5s ease-out 1s forwards,
+                       flower-sway 8s ease-in-out 2.5s infinite;
         }
 
         /* Border Box */
@@ -710,11 +726,6 @@
                 
                 <!-- Sisi Kanan: Kartu Foto -->
                 <div class="flex-1 relative" data-aos="fade-left">
-                    <!-- Hiasan Bunga -->
-                    <div class="absolute -top-16 -left-16 z-0" data-aos="zoom-in" data-aos-delay="1200" data-aos-duration="1000">
-                        <img src="https://media-public.canva.com/Vj-JM/MAGy82Vj-JM/1/tl.png" alt="Hiasan Bunga" class="w-48 opacity-75 pointer-events-none animate-flower-continuous">
-                    </div>
-
                     <div class="custom-card-frame relative z-10">
                         <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-auto" alt="dedek malika">
                         <div class="info-border-box">
@@ -737,8 +748,12 @@
             </div>
             
             <!-- Detail Acara with Photo -->
-            <div class="px-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="bg-white custom-card">
+            <div class="px-6 relative" data-aos="fade-up" data-aos-delay="200">
+                <!-- Hiasan Bunga -->
+                <div class="flower-container absolute -top-16 -left-16 z-0">
+                    <img src="https://media-public.canva.com/Vj-JM/MAGy82Vj-JM/1/tl.png" alt="Hiasan Bunga" class="w-48 opacity-75 pointer-events-none">
+                </div>
+                <div class="bg-white custom-card relative z-10">
                     <div class="p-2">
                         <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_496938534_18325096435207196_6201163391166582384_n.jpg?raw=true" alt="Lokasi Pesta" class="w-full h-56 object-cover object-top">
                     </div>
