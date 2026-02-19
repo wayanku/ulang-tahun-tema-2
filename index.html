@@ -105,9 +105,13 @@
 
         .flower-container {
             opacity: 0; /* Start hidden */
-            /* Chain two animations: enter first, then sway infinitely */
-            animation: flower-enter 1.5s ease-out 1s forwards,
-                       flower-sway 8s ease-in-out 2.5s infinite;
+        }
+
+        /* Jalankan animasi HANYA saat elemen induknya (kartu) sudah terlihat/aktif */
+        .aos-animate .flower-container {
+            /* Delay 1.5s memastikan kartu (durasi ~1.2s) sudah selesai muncul duluan */
+            animation: flower-enter 1.5s ease-out 1.5s forwards,
+                       flower-sway 8s ease-in-out 3.0s infinite;
         }
 
         /* Border Box */
