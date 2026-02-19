@@ -774,9 +774,9 @@
 
         <!-- SECTION 2: BRIDE -->
         <section class="pt-20 pb-4 px-4 bg-white overflow-hidden">
-            <div class="grid grid-cols-[auto_1fr] items-center gap-4">
+            <div class="grid grid-cols-[auto_1fr] gap-4"> <!-- Hapus items-center agar tinggi kolom sama (stretch) -->
                 <!-- Sisi Kiri: Tulisan Vertikal -->
-                <div> <!-- Wrapper stabil tanpa animasi untuk menjaga posisi tengah -->
+                <div class="h-full flex flex-col justify-center"> <!-- Wrapper Full Height & Center Content -->
                     <div class="vertical-container" data-aos="fade-right">
                         <div class="v-text-dark">The</div>
                         <div class="v-text-purple">Birthday Girl</div>
@@ -784,7 +784,7 @@
                 </div>
                 
                 <!-- Sisi Kanan: Kartu Foto -->
-                <div class="relative"> <!-- Wrapper stabil tanpa animasi, flex-1 dihapus karena sudah pakai Grid -->
+                <div class="relative"> <!-- Wrapper stabil -->
                     <div class="custom-card-frame relative z-10" data-aos="fade-left">
                         <!-- Wrapper Aspect Ratio 4:5 (Card sebagai pedoman) -->
                         <div class="w-full aspect-[4/5] overflow-hidden bg-gray-100">
