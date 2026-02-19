@@ -27,7 +27,7 @@
             --text-dark: #4a4a4a;
         }
         html, body {
-            overflow-x: hidden; /* Kunci mutlak agar tidak bisa scroll samping */
+            overflow-x: clip; /* Ganti hidden ke clip agar fitur sticky berfungsi normal */
             width: 100%;
             overscroll-behavior-x: none; /* Mencegah efek 'membal' atau swipe gesture browser */
             scroll-behavior: smooth; /* Scroll menjadi lembut */
@@ -841,7 +841,8 @@
         <!-- SECTION STORY LOVE (UPDATED WITH CARDS) -->
         <section class="relative bg-black min-h-[160vh]">
             <!-- Background Slideshow -->
-            <div class="sticky top-0 h-screen w-full overflow-hidden z-0" data-aos="fade-in" data-aos-duration="1500">
+            <!-- Hapus data-aos di sini karena animasi transform bisa merusak efek sticky -->
+            <div class="sticky top-0 h-screen w-full overflow-hidden z-0">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true');"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
             </div>
