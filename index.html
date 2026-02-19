@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -81,6 +82,16 @@
         }
         .music-spin {
             animation: rotate-music 4s linear infinite;
+        }
+
+        /* Flower Sway Animation */
+        @keyframes flower-sway {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-30deg) scale(1.1); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+        .animate-flower-continuous {
+            animation: flower-sway 6s ease-in-out infinite;
         }
 
         /* Border Box */
@@ -700,7 +711,9 @@
                 <!-- Sisi Kanan: Kartu Foto -->
                 <div class="flex-1 relative" data-aos="fade-left">
                     <!-- Hiasan Bunga -->
-                    <img src="https://media-public.canva.com/Vj-JM/MAGy82Vj-JM/1/tl.png" alt="Hiasan Bunga" class="absolute -top-16 -left-16 w-48 opacity-75 transform -rotate-45 pointer-events-none z-0">
+                    <div class="absolute -top-16 -left-16 z-0" data-aos="zoom-in" data-aos-delay="1200" data-aos-duration="1000">
+                        <img src="https://media-public.canva.com/Vj-JM/MAGy82Vj-JM/1/tl.png" alt="Hiasan Bunga" class="w-48 opacity-75 pointer-events-none animate-flower-continuous">
+                    </div>
 
                     <div class="custom-card-frame relative z-10">
                         <img src="https://github.com/wayanku/ulang-tahun-tema-2/blob/main/SnapInsta.to_499770123_18326192566207196_4317410756545218107_n.jpg?raw=true" class="w-full h-auto" alt="dedek malika">
